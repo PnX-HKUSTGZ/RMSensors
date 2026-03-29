@@ -1,0 +1,9 @@
+image_file_publisher_node:
+    ros__parameters:
+        source.path: "/home/pnx/Desktop/000015_png.rf.6f8dfb58d5273c6e55be8bc6e0b12f0f.jpg"
+        source.type: "auto"
+        publish.image_topic: "/sensor/camera/images"
+        publish.frame_id: "sensor/camera"
+        publish.queue_size: 10
+        playback.rate_hz: 0.0
+        playback.loop: true

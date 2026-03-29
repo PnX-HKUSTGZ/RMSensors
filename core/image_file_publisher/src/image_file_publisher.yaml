@@ -1,0 +1,51 @@
+image_file_publisher:
+    source:
+        path:
+            type: string
+            default_value: ""
+            read_only: true
+            description: "输入路径，可为单张图片、图片目录或视频文件"
+
+        type:
+            type: string
+            default_value: "auto"
+            read_only: true
+            description: "输入类型，支持 auto/image/directory/video"
+
+    publish:
+        image_topic:
+            type: string
+            default_value: "/sensor/camera/images"
+            read_only: true
+            description: "图像发布话题"
+            validation:
+                not_empty<>: null
+
+        frame_id:
+            type: string
+            default_value: "sensor/camera"
+            read_only: true
+            description: "发布图像使用的 frame_id"
+            validation:
+                not_empty<>: null
+
+        queue_size:
+            type: int
+            default_value: 10
+            read_only: true
+            description: "图像发布队列长度"
+            validation:
+                gt<>: 0
+
+    playback:
+        rate_hz:
+            type: double
+            default_value: 0.0
+            read_only: true
+            description: "发布频率。大于 0 时使用该频率，否则视频使用源 FPS，图片默认 10 Hz"
+
+        loop:
+            type: bool
+            default_value: true
+            read_only: true
+            description: "视频或图片目录播放到结尾后是否循环"
