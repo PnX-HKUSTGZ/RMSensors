@@ -1,0 +1,59 @@
+camera_calibration:
+  subscription:
+    image_topic:
+      type: string
+      default_value: "/sensor/camera/images"
+      read_only: true
+      description: "标定图像订阅话题"
+      validation:
+        not_empty<>: null
+
+    queue_size:
+      type: int
+      default_value: 10
+      read_only: true
+      description: "图像订阅队列长度"
+      validation:
+        gt<>: 0
+
+  target:
+    width:
+      type: int
+      default_value: 7
+      read_only: true
+      description: "圆点标定板宽度方向点数"
+      validation:
+        gt<>: 0
+
+    height:
+      type: int
+      default_value: 7
+      read_only: true
+      description: "圆点标定板高度方向点数"
+      validation:
+        gt<>: 0
+
+    spacing_m:
+      type: double
+      default_value: 0.03
+      read_only: true
+      description: "相邻圆点中心间距，单位米"
+      validation:
+        gt<>: 0.0
+
+  sampling:
+    required_frames:
+      type: int
+      default_value: 50
+      read_only: true
+      description: "触发标定所需的有效样本帧数"
+      validation:
+        gt<>: 0
+
+    display_wait_ms:
+      type: int
+      default_value: 500
+      read_only: true
+      description: "窗口显示和按键处理等待时长，单位毫秒"
+      validation:
+        gt_eq<>: 0

@@ -1,0 +1,9 @@
+calibrate_camera:
+  ros__parameters:
+    subscription.image_topic: "/sensor/camera/images"
+    subscription.queue_size: 10
+    target.width: 7
+    target.height: 7
+    target.spacing_m: 0.03
+    sampling.required_frames: 50
+    sampling.display_wait_ms: 500
