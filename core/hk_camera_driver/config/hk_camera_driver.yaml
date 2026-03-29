@@ -1,0 +1,37 @@
+hk_camera_driver:
+  ros__parameters:
+    device.index: 0
+    device.user_defined_name: ""
+    device.serial_number: ""
+    device.gige_packet_size: 0   
+
+    camera.exposure_auto: true
+    camera.auto_exposure_lower_us: 1000
+    camera.auto_exposure_upper_us: 30000
+    camera.manual_exposure_us: 5000.0
+    camera.gain: 1.0
+
+    publish.image_topic: "/sensor/camera/images"
+    publish.frame_id: "sensor/camera"
+    publish.queue_size: 10
+    publish.enable_undistort: true
+
+    calibration.camera_matrix: [1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0]
+    calibration.dist_coeffs: [0.0, 0.0, 0.0, 0.0, 0.0]
+
+    tf.publish_static_tf: false
+    tf.parent_frame: "robot_base_link"
+    tf.child_frame: "sensor/camera"
+    tf.translation.x: 0.0
+    tf.translation.y: 0.0
+    tf.translation.z: 0.0
+    tf.rotation.x: 0.0
+    tf.rotation.y: 0.0
+    tf.rotation.z: 0.0
+    tf.rotation.w: 1.0
+
+    conversion.bayer_quality: 2
+    conversion.bayer_filter_enable: false
+
+    reconnect.retry_interval_ms: 1000
+    reconnect.frame_timeout_ms: 3000

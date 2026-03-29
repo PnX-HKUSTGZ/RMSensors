@@ -1,0 +1,201 @@
+hk_camera_driver:
+  device:
+    index:
+      type: int
+      default_value: 0
+      read_only: true
+      description: "相机索引。当未设置 user_defined_name 或 serial_number 时生效"
+      validation:
+        gt_eq<>: 0
+
+    user_defined_name:
+      type: string
+      default_value: ""
+      read_only: true
+      description: "按 MVS 中的用户自定义名称选择设备，非空时优先于 index"
+
+    serial_number:
+      type: string
+      default_value: ""
+      read_only: true
+      description: "按设备序列号选择设备，非空时优先于 index"
+
+    gige_packet_size:
+      type: int
+      default_value: 0
+      read_only: true
+      description: "GigE 包大小。0 表示使用 SDK 推荐值"
+      validation:
+        gt_eq<>: 0
+
+  camera:
+    exposure_auto:
+      type: bool
+      default_value: true
+      read_only: true
+      description: "是否启用自动曝光"
+
+    auto_exposure_lower_us:
+      type: int
+      default_value: 1000
+      read_only: true
+      description: "自动曝光下限，单位微秒"
+      validation:
+        gt_eq<>: 0
+
+    auto_exposure_upper_us:
+      type: int
+      default_value: 30000
+      read_only: true
+      description: "自动曝光上限，单位微秒"
+      validation:
+        gt_eq<>: 0
+
+    manual_exposure_us:
+      type: double
+      default_value: 5000.0
+      read_only: true
+      description: "手动曝光时间，单位微秒，在 exposure_auto=false 时生效"
+      validation:
+        gt<>: 0.0
+
+    gain:
+      type: double
+      default_value: 15.0
+      read_only: true
+      description: "模拟增益值"
+
+  publish:
+    image_topic:
+      type: string
+      default_value: "/sensor/camera/images"
+      read_only: true
+      description: "图像发布话题"
+
+    frame_id:
+      type: string
+      default_value: "sensor/camera"
+      read_only: true
+      description: "发布图像使用的 frame_id"
+
+    queue_size:
+      type: int
+      default_value: 10
+      read_only: true
+      description: "图像发布队列长度"
+      validation:
+        gt<>: 0
+
+    enable_undistort:
+      type: bool
+      default_value: true
+      read_only: true
+      description: "是否对输出图像做去畸变"
+
+  calibration:
+    camera_matrix:
+      type: double_array_fixed_9
+      default_value: [1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0]
+      read_only: true
+      description: "相机内参矩阵，按行展开为 3x3"
+
+    dist_coeffs:
+      type: double_array
+      default_value: [0.0, 0.0, 0.0, 0.0, 0.0]
+      read_only: true
+      description: "相机畸变系数"
+
+  tf:
+    publish_static_tf:
+      type: bool
+      default_value: false
+      read_only: true
+      description: "是否发布相机的静态 TF"
+
+    parent_frame:
+      type: string
+      default_value: "robot_base_link"
+      read_only: true
+      description: "静态 TF 父坐标系"
+
+    child_frame:
+      type: string
+      default_value: "sensor/camera"
+      read_only: true
+      description: "静态 TF 子坐标系"
+
+    translation:
+      x:
+        type: double
+        default_value: 0.0
+        read_only: true
+        description: "静态 TF 平移 x"
+
+      y:
+        type: double
+        default_value: 0.0
+        read_only: true
+        description: "静态 TF 平移 y"
+
+      z:
+        type: double
+        default_value: 0.0
+        read_only: true
+        description: "静态 TF 平移 z"
+
+    rotation:
+      x:
+        type: double
+        default_value: 0.0
+        read_only: true
+        description: "静态 TF 四元数 x"
+
+      y:
+        type: double
+        default_value: 0.0
+        read_only: true
+        description: "静态 TF 四元数 y"
+
+      z:
+        type: double
+        default_value: 0.0
+        read_only: true
+        description: "静态 TF 四元数 z"
+
+      w:
+        type: double
+        default_value: 1.0
+        read_only: true
+        description: "静态 TF 四元数 w"
+
+  conversion:
+    bayer_quality:
+      type: int
+      default_value: 2
+      read_only: true
+      description: "Bayer 转换质量，0 快速，1 均衡，2 最优，3 最优+"
+      validation:
+        gt_eq<>: 0
+
+    bayer_filter_enable:
+      type: bool
+      default_value: false
+      read_only: true
+      description: "是否启用 Bayer 插值平滑"
+
+  reconnect:
+    retry_interval_ms:
+      type: int
+      default_value: 1000
+      read_only: true
+      description: "运行期故障后的固定重连周期，单位毫秒"
+      validation:
+        gt<>: 0
+
+    frame_timeout_ms:
+      type: int
+      default_value: 3000
+      read_only: true
+      description: "运行中超过该时间未收到新帧则触发重连，单位毫秒"
+      validation:
+        gt<>: 0
