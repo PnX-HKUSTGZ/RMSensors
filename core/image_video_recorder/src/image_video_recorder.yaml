@@ -1,0 +1,50 @@
+image_video_recorder:
+    input:
+        image_topic:
+            type: string
+            default_value: "/sensor/camera/images"
+            read_only: true
+            description: "订阅的图像话题"
+            validation:
+                not_empty<>: null
+
+        queue_size:
+            type: int
+            default_value: 10
+            read_only: true
+            description: "图像订阅队列长度"
+            validation:
+                gt<>: 0
+
+    output:
+        directory:
+            type: string
+            default_value: "/tmp/image_video_recorder"
+            read_only: true
+            description: "MP4 输出目录"
+            validation:
+                not_empty<>: null
+
+        filename_prefix:
+            type: string
+            default_value: "image_video_recorder"
+            read_only: true
+            description: "自动生成的 MP4 文件名前缀"
+            validation:
+                not_empty<>: null
+
+    recording:
+        fps:
+            type: double
+            default_value: 30.0
+            read_only: true
+            description: "输出视频的固定帧率"
+            validation:
+                gt<>: 0.0
+
+    runtime:
+        temp_root:
+            type: string
+            default_value: ""
+            read_only: true
+            description: "临时帧目录的根路径，留空则使用系统临时目录"

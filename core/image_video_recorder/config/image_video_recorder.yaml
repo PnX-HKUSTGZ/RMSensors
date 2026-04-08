@@ -1,0 +1,8 @@
+image_video_recorder_node:
+    ros__parameters:
+        input.image_topic: "/camera/camera/color/image_raw"
+        input.queue_size: 10
+        output.directory: "/tmp/image_video_recorder"
+        output.filename_prefix: "image_video_recorder"
+        recording.fps: 30.0
+        runtime.temp_root: ""
